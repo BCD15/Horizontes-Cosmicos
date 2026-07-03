@@ -10,9 +10,15 @@ const CONFIG = {
   },
 
   BATTLE: {
-    // Ajuste aqui a escalabilidade da dificuldade.
-    // Exemplo: 12 = inimigos ganham +12% de vida, escudo e dano a cada vitória.
+    // Evolução padrão
     difficultyGrowthPercent: 12,
+
+    // ALTERADO: Tabela de evolução dos inimigos (em %) a cada vitória
+    difficultyOptions: {
+      "FÁCIL": 5,   // Inimigos sobem 5% de força por vitória
+      "MÉDIO": 12,  // Inimigos sobem 12% de força por vitória
+      "DIFÍCIL": 25 // Inimigos sobem 25% de força por vitória
+    },
 
     baseEnemy: {
       hp: 240,
