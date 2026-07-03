@@ -48,18 +48,16 @@ const ChoiceMenu = {
     this.buttons = [];
 
     const width = 620;
-    // Aumentei a altura de 230 para 300 para caber os 3 botões de dificuldade!
-    const height = 300; 
+    const height = 230;
 
     const x = CONFIG.GAME_WIDTH / 2 - width / 2;
-    // Alterado para ficar perfeitamente no centro da tela na vertical
-    const y = CONFIG.GAME_HEIGHT / 2 - height / 2;
+    const y = CONFIG.GAME_HEIGHT - 280;
 
     PixelUI.drawPanel(ctx, x, y, width, height);
 
     PixelUI.drawCenteredText(
       ctx,
-      "ESCOLHA A DIFICULDADE", // Deixei o título mais claro
+      "ESCOLHA",
       x + width / 2,
       y + 42,
       16

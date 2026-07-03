@@ -6,6 +6,8 @@ const ColonyScene = {
 
     Player.x = 400;
     Player.y = 250;
+
+    AudioManager.playBGM("bgm_colony", 0.2);
   },
 
   update(deltaTime) {
