@@ -175,9 +175,25 @@ window.addEventListener("DOMContentLoaded", async () => {
 
   const startButton = document.getElementById("start-game-btn");
 
+
   startButton.addEventListener("click", () => {
+    // 1. Esconde a interface HTML do menu
+    document.getElementById("menu-screen").classList.remove("active");
+
+    // 2. Carrega a cena da colônia para ter um fundo bonito no Canvas
     SceneManager.change("colony");
+
+    // 3. Abre o menu de dificuldades nativo do Canvas por cima
+    ChoiceMenu.open(
+      ["FÁCIL", "MÉDIO", "DIFÍCIL"], 
+      (escolha) => {
+        CONFIG.BATTLE.difficultyGrowthPercent = CONFIG.BATTLE.difficultyOptions[escolha];
+        ChoiceMenu.close();
+      }
+    );
   });
+
+ 
 
   Game.start();
 });
