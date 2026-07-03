@@ -3,16 +3,12 @@ const MenuScene = {
     document
       .getElementById("menu-screen")
       .classList.add("active");
-
-      AudioManager.playBGM("bgm_menu", 0.4);
   },
 
   exit() {
     document
       .getElementById("menu-screen")
       .classList.remove("active");
-
-    AudioManager.stopBGM();
   }
 };
 

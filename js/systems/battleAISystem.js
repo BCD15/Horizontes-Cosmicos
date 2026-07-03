@@ -21,12 +21,6 @@ const BattleAISystem = {
     const shieldStats = CombatSystem.getPlayerShieldStats();
     const result = CombatSystem.applyDamage(GameState.player, damage, shieldStats.absorption);
 
-    console.log("O inimigo tentou atirar! O AudioManager existe?", !!AudioManager);
-
-    if (AudioManager) {
-      AudioManager.playSFX("som_tiro1", 0.5);
-    }
-
     battle.spawnProjectile("enemy", damage);
     battle.addFloatingText(
       `INIMIGO: -${result.total}`,
