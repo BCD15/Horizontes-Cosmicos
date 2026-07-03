@@ -50,10 +50,8 @@ const BattleScene = {
     this.pendingBattleResult = null;
     this.finishDelayTimer = 0;
 
-    const sorteio = Math.floor(Math.random() * 4) + 1;
+    const sorteio = Math.floor(Math.random() * 4) + 1; 
     this.currentEnemySprite = `enemy_ship_${sorteio}`;
-
-    AudioManager.playBGM("bgm_battle", 0.2);
 
     CombatSystem.preparePlayerForBattle();
     this.enemy = CombatSystem.createEnemy();
@@ -163,8 +161,6 @@ const BattleScene = {
       return;
     }
 
-    AudioManager.playSFX("som_tiro1", 0.6); // 0.6 é o volume (60%)
-
     const result = CombatSystem.getAccuracyResult(this.aimValue);
     this.reloadTimer = this.weapon.reload;
 
@@ -189,8 +185,6 @@ const BattleScene = {
       this.message = "Pulso eletromagnético recarregando.";
       return;
     }
-
-    AudioManager.playSFX("som_tiro2", 0.6); // 0.6 é o volume (60%)
 
     const result = CombatSystem.getAccuracyResult(this.aimValue);
     this.reloadTimer = this.weapon.reload;
@@ -250,9 +244,6 @@ const BattleScene = {
     const result = CombatSystem.getAccuracyResult(this.aimValue);
     this.laserCharge = Math.max(0, this.laserCharge - this.weapon.heatGain * seconds);
 
-    AudioManager.playSFX("som_tiro3", 0.6); // 0.6 é o volume (60%)
-
-
     if (this.laserCharge <= 0) {
       this.laserCharge = 0;
       this.laserOverheated = true;
@@ -301,12 +292,10 @@ const BattleScene = {
 
     if (playerWon) {
       this.message = "Impacto confirmado. Finalizando batalha...";
-      AudioManager.playBGM("victory", 0.2);
       return;
     }
 
     this.message = "Sua nave foi atingida. Finalizando batalha...";
-    AudioManager.playBGM("defeat", 0.2);
   },
 
   updateBattleEnding(deltaTime) {
@@ -473,9 +462,9 @@ const BattleScene = {
 
     if (playerImage) {
       ctx.save();
-
+      
       ctx.drawImage(playerImage, x - 18, y - 18, 200, 200);
-
+      
       ctx.restore();
     } else {
       ctx.fillStyle = "#d62828";
@@ -491,16 +480,16 @@ const BattleScene = {
 
   drawEnemyShip(ctx, x, y) {
     const disabled = this.enemy.disabledTimer > 0;
-
+    
     let enemyImage = AssetLoader.getImage(this.currentEnemySprite);
 
     if (enemyImage) {
       ctx.save();
-
+      
       if (disabled) {
         ctx.globalAlpha = 0.5; // Efeito transparente se o EMP acertar
       }
-
+      
       ctx.drawImage(enemyImage, x - 30, y - 12, 200, 200);
       ctx.restore();
 
@@ -741,7 +730,6 @@ const BattleScene = {
     this.buttons.push({ x: x + 290, y: y + 118, width: 200, height: 52, action: "map" });
     PixelUI.drawButton(ctx, x + 70, y + 118, 200, 52, "TENTAR");
     PixelUI.drawButton(ctx, x + 290, y + 118, 200, 52, "MAPA");
-    AudioManager.stopBGM()
   }
 };
 
