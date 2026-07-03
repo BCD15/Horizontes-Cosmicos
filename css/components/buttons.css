@@ -1,0 +1,36 @@
+.primary-button,
+.pixel-menu-button {
+  background: var(--pixel-panel-light);
+  color: var(--pixel-text);
+
+  border: 4px solid var(--pixel-border-dark);
+
+  box-shadow:
+    inset 0 0 0 2px #ffffff80,
+    inset 0 0 0 4px var(--pixel-border-purple),
+    4px 4px 0 #00000055;
+
+  padding: 14px 22px;
+
+  font-family: "Press Start 2P", monospace;
+  font-size: 10px;
+
+  cursor: pointer;
+  text-transform: uppercase;
+  image-rendering: pixelated;
+}
+
+.primary-button:hover,
+.pixel-menu-button:hover {
+  transform: translateY(-2px);
+  background: #ffdca6;
+}
+
+.primary-button:active,
+.pixel-menu-button:active {
+  transform: translateY(2px);
+}
+
+.pixel-menu-button.small {
+  min-width: 105px;
+}

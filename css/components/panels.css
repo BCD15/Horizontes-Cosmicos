@@ -1,0 +1,20 @@
+.menu-panel {
+  width: 620px;
+  padding: 40px;
+  background: var(--color-panel);
+  border: 3px solid var(--color-primary);
+  text-align: center;
+}
+
+.menu-panel h1 {
+  color: var(--color-primary);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.menu-panel p {
+  color: var(--color-muted);
+  margin-bottom: 28px;
+  font-size: 12px;
+  line-height: 1.8;
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Horizontes Cósmicos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <!-- BASE -->
+  <link rel="stylesheet" href="./css/base/reset.css" />
+  <link rel="stylesheet" href="./css/base/variables.css" />
+  <link rel="stylesheet" href="./css/base/typography.css" />
+
+  <!-- LAYOUT -->
+  <link rel="stylesheet" href="./css/layout/game.css" />
+  <link rel="stylesheet" href="./css/layout/canvas.css" />
+  <link rel="stylesheet" href="./css/layout/ui.css" />
+
+  <!-- COMPONENTS -->
+  <link rel="stylesheet" href="./css/components/buttons.css" />
+  <link rel="stylesheet" href="./css/components/panels.css" />
+
+  <!-- SCENES -->
+  <link rel="stylesheet" href="./css/scenes/menu.css" />
+  <link rel="stylesheet" href="./css/scenes/dialog.css" />
+</head>
+
+<body>
+
+  <main id="game-root">
+    <canvas id="game-canvas" width="1280" height="720"></canvas>
+
+    <section id="ui-layer">
+      <div id="menu-screen" class="screen active">
+        <div class="menu-content">
+          <div class="planet-menu planet-earth"></div>
+
+          <nav class="main-menu-buttons">
+            <button id="start-game-btn" class="pixel-menu-button">JOGAR</button>
+            <button class="pixel-menu-button">OPÇÕES</button>
+            <button class="pixel-menu-button small">SAIR</button>
+          </nav>
+        </div>
+      </div>
+
+      <div id="dialog-box" class="dialog-box hidden">
+        <h3 id="dialog-speaker">NPC</h3>
+        <p id="dialog-text">Texto do diálogo</p>
+        <button id="dialog-next-btn" class="primary-button">Continuar</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- CORE -->
+  <script src="./js/core/config.js"></script>
+  <script src="./js/core/gameState.js"></script>
+  <script src="./js/core/inputManager.js"></script>
+  <script src="./js/core/sceneManager.js"></script>
+  <script src="./js/core/assetLoader.js"></script>
+
+  <!-- DATA -->
+  <script src="./js/data/planets.js"></script>
+  <script src="./js/data/dialogs.js"></script>
+  <script src="./js/data/modules.js"></script>
+
+  <!-- SYSTEMS -->
+  <script src="./js/systems/collisionSystem.js"></script>
+  <script src="./js/systems/dialogueSystem.js"></script>
+  <script src="./js/systems/interactionSystem.js"></script>
+  <script src="./js/systems/animationSystem.js"></script>
+  <script src="./js/systems/combatSystem.js"></script>
+  <script src="./js/systems/battleAISystem.js"></script>
+  <script src="./js/systems/travelSystem.js"></script>
+
+  <!-- ENTITIES -->
+  <script src="./js/entities/player.js"></script>
+
+  <!-- SCENES -->
+  <script src="./js/scenes/menuScene.js"></script>
+  <script src="./js/scenes/colonyScene.js"></script>
+  <script src="./js/scenes/mapScene.js"></script>
+  <script src="./js/scenes/battleScene.js"></script>
+
+  <!-- UI -->
+  <script src="./js/ui/pixelUI.js"></script>
+  <script src="./js/ui/dialogBox.js"></script>
+  <script src="./js/ui/choiceMenu.js"></script>
+  <script src="./js/ui/shopMenu.js"></script>
+  <script src="./js/ui/statusPanel.js"></script>
+  <script src="./js/ui/inventoryUI.js"></script>
+  <script src="./js/ui/pauseMenu.js"></script>
+
+  <!-- GAME -->
+  <script src="./js/core/game.js"></script>
+  <script src="./js/core/main.js"></script>
+</body>
+</html>

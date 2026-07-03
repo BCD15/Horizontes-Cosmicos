@@ -1,0 +1,44 @@
+.dialog-box {
+  position: absolute;
+  left: 80px;
+  right: 80px;
+  bottom: 35px;
+
+  padding: 24px;
+
+  background: var(--pixel-panel);
+  color: var(--pixel-text);
+
+  border: 5px solid var(--pixel-border-dark);
+
+  box-shadow:
+    inset 0 0 0 3px #f7d49d,
+    inset 0 0 0 6px var(--pixel-border-purple),
+    6px 6px 0 #00000066;
+
+  pointer-events: auto;
+  image-rendering: pixelated;
+}
+
+.dialog-box h3 {
+  color: var(--pixel-text);
+  margin-bottom: 14px;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.dialog-box p {
+  color: var(--pixel-text);
+  line-height: 1.8;
+  font-size: 11px;
+  margin-bottom: 18px;
+}
+
+.dialog-box {
+  text-align: left;
+}
+
+#dialog-next-btn {
+  display: block;
+  margin: 18px auto 0 auto;
+}

@@ -1,0 +1,16 @@
+body {
+  background: #050914;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#game-root {
+  position: relative;
+  width: min(96vw, var(--game-width));
+  height: min(96vh, var(--game-height));
+  aspect-ratio: 16 / 9;
+  background: #0b1324;
+  overflow: hidden;
+}

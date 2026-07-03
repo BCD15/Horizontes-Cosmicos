@@ -1,0 +1,19 @@
+:root {
+  --color-bg: #050914;
+
+  --pixel-panel: #e8b978;
+  --pixel-panel-light: #f3cf98;
+  --pixel-border-dark: #2a1722;
+  --pixel-border-purple: #7c3b55;
+
+  --pixel-text: #1d1d2f;
+  --pixel-muted: #5a3a34;
+
+  --color-primary: #e8b978;
+  --color-secondary: #7c3b55;
+  --color-text: #1d1d2f;
+  --color-muted: #5a3a34;
+
+  --game-width: 1280px;
+  --game-height: 720px;
+}
