@@ -97,11 +97,25 @@ window.addEventListener("DOMContentLoaded", async () => {
     );
   }
 
+  // --- CARREGAMENTO DE SONS ---
+  await AudioManager.load("som_tiro1", "./assets/audio/sfx/shoot.mp3");
+  await AudioManager.load("som_tiro2", "./assets/audio/sfx/emp_shoot.mp3");
+  await AudioManager.load("som_tiro3", "./assets/audio/sfx/laser_shoot.mp3");
+  await AudioManager.load("victory", "./assets/audio/sfx/victory.mp3");
+  await AudioManager.load("defeat", "./assets/audio/sfx/defeat.mp3");
+  await AudioManager.load("bgm_menu", "./assets/audio/music/menu_theme.mp3");
+  await AudioManager.load("bgm_colony", "./assets/audio/music/colony_theme.mp3");
+  await AudioManager.load("bgm_battle", "./assets/audio/music/battle_theme.mp3");
+
   Player.init();
 
   SceneManager.change("menu");
 
   canvas.addEventListener("click", (event) => {
+    if (SceneManager.currentScene === MenuScene && !AudioManager.currentBGM) {
+       AudioManager.playBGM("bgm_menu", 0.4);
+    }
+
     const rect = canvas.getBoundingClientRect();
 
     const mouseX =
