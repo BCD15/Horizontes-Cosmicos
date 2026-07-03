@@ -23,8 +23,8 @@ const BattleScene = {
   projectileSpeed: 0.00115,
   projectiles: [],
   floatingTexts: [],
-  playerShip: { x: 160, y: 510, width: 150, height: 66 },
-  enemyShip: { x: 940, y: 145, width: 160, height: 72 },
+  playerShip: { x: 100, y: 510, width: 200, height: 200 },
+  enemyShip: { x: 940, y: 135, width: 200, height: 200 },
 
   enter() {
     this.buttons = [];
@@ -47,6 +47,11 @@ const BattleScene = {
     this.state = "fighting";
     this.pendingBattleResult = null;
     this.finishDelayTimer = 0;
+    this.pendingBattleResult = null;
+    this.finishDelayTimer = 0;
+
+    const sorteio = Math.floor(Math.random() * 4) + 1; 
+    this.currentEnemySprite = `enemy_ship_${sorteio}`;
 
     CombatSystem.preparePlayerForBattle();
     this.enemy = CombatSystem.createEnemy();
@@ -418,22 +423,32 @@ const BattleScene = {
 
   drawBackground(ctx) {
     const destination = TravelSystem.getDestination();
-    const gradient = ctx.createLinearGradient(0, 0, CONFIG.GAME_WIDTH, CONFIG.GAME_HEIGHT);
-    gradient.addColorStop(0, "#050617");
-    gradient.addColorStop(1, "#101832");
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, CONFIG.GAME_WIDTH, CONFIG.GAME_HEIGHT);
-
-    this.stars.forEach((star) => {
-      ctx.fillStyle = "rgba(150, 210, 255, 0.8)";
-      ctx.fillRect(star.x, star.y, star.size, star.size);
-    });
+    let bgImage = null;
 
     if (destination) {
-      ctx.fillStyle = destination.color;
-      ctx.beginPath();
-      ctx.arc(1120, 120, 72, 0, Math.PI * 2);
-      ctx.fill();
+      bgImage = AssetLoader.getImage(`battle_bg_${destination.id}`);
+    }
+
+    if (bgImage) {
+      ctx.drawImage(bgImage, 0, 0, CONFIG.GAME_WIDTH, CONFIG.GAME_HEIGHT);
+    } else {
+      const gradient = ctx.createLinearGradient(0, 0, CONFIG.GAME_WIDTH, CONFIG.GAME_HEIGHT);
+      gradient.addColorStop(0, "#050617");
+      gradient.addColorStop(1, "#101832");
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, CONFIG.GAME_WIDTH, CONFIG.GAME_HEIGHT);
+
+      this.stars.forEach((star) => {
+        ctx.fillStyle = "rgba(150, 210, 255, 0.8)";
+        ctx.fillRect(star.x, star.y, star.size, star.size);
+      });
+
+      if (destination) {
+        ctx.fillStyle = destination.color;
+        ctx.beginPath();
+        ctx.arc(1120, 120, 72, 0, Math.PI * 2);
+        ctx.fill();
+      }
     }
   },
 
@@ -443,27 +458,56 @@ const BattleScene = {
   },
 
   drawPlayerShip(ctx, x, y) {
-    ctx.fillStyle = "#d62828";
-    ctx.fillRect(x, y, 126, 48);
-    ctx.fillStyle = "#f77f00";
-    ctx.fillRect(x + 88, y - 18, 54, 84);
-    ctx.fillStyle = "#003049";
-    ctx.fillRect(x + 18, y + 9, 42, 18);
-    ctx.fillStyle = "#ffba08";
-    ctx.fillRect(x - 18, y + 15, 28, 18);
+    let playerImage = AssetLoader.getImage("player_ship_battle");
+
+    if (playerImage) {
+      ctx.save();
+      
+      ctx.drawImage(playerImage, x - 18, y - 18, 200, 200);
+      
+      ctx.restore();
+    } else {
+      ctx.fillStyle = "#d62828";
+      ctx.fillRect(x, y, 126, 48);
+      ctx.fillStyle = "#f77f00";
+      ctx.fillRect(x + 88, y - 18, 54, 84);
+      ctx.fillStyle = "#003049";
+      ctx.fillRect(x + 18, y + 9, 42, 18);
+      ctx.fillStyle = "#ffba08";
+      ctx.fillRect(x - 18, y + 15, 28, 18);
+    }
   },
 
   drawEnemyShip(ctx, x, y) {
     const disabled = this.enemy.disabledTimer > 0;
-    ctx.fillStyle = disabled ? "#476a7a" : "#6c757d";
-    ctx.fillRect(x, y, 138, 52);
-    ctx.fillStyle = disabled ? "#28505d" : "#343a40";
-    ctx.fillRect(x - 30, y - 12, 70, 76);
-    ctx.fillStyle = disabled ? "#80deea" : "#9d0208";
-    ctx.fillRect(x + 75, y + 13, 46, 16);
+    
+    let enemyImage = AssetLoader.getImage(this.currentEnemySprite);
 
-    if (disabled) {
-      PixelUI.drawCenteredText(ctx, "DESABILITADA", x + 70, y + 88, 8);
+    if (enemyImage) {
+      ctx.save();
+      
+      if (disabled) {
+        ctx.globalAlpha = 0.5; // Efeito transparente se o EMP acertar
+      }
+      
+      ctx.drawImage(enemyImage, x - 30, y - 12, 200, 200);
+      ctx.restore();
+
+      if (disabled) {
+        PixelUI.drawCenteredText(ctx, "DESABILITADA", x + 70, y + 88, 8);
+      }
+
+    } else {
+      ctx.fillStyle = disabled ? "#476a7a" : "#6c757d";
+      ctx.fillRect(x, y, 138, 52);
+      ctx.fillStyle = disabled ? "#28505d" : "#343a40";
+      ctx.fillRect(x - 30, y - 12, 70, 76);
+      ctx.fillStyle = disabled ? "#80deea" : "#9d0208";
+      ctx.fillRect(x + 75, y + 13, 46, 16);
+
+      if (disabled) {
+        PixelUI.drawCenteredText(ctx, "DESABILITADA", x + 70, y + 88, 8);
+      }
     }
   },
 

@@ -122,15 +122,20 @@ const ColonyScene = {
         return;
       }
 
-      ctx.fillStyle = npc.color;
-      ctx.fillRect(npc.x, npc.y, npc.width, npc.height);
+      const image = npc.spriteKey ? AssetLoader.getImage(npc.spriteKey) : null;
+
+      if (image) {
+        ctx.drawImage(image, npc.x, npc.y, npc.width, npc.height);
+      } else {
+        ctx.fillStyle = npc.color;
+        ctx.fillRect(npc.x, npc.y, npc.width, npc.height);
+      }
 
       ctx.fillStyle = "#ffffff";
       ctx.font = '9px "Press Start 2P"';
       ctx.fillText(npc.name, npc.x - 10, npc.y - 10);
     });
   },
-
 
   getActiveHelperData() {
     const helpers = ShopModules.helpers?.items || [];
@@ -143,17 +148,23 @@ const ColonyScene = {
     const label = helper ? helper.title : "Ajudante";
 
     if (image) {
-      ctx.drawImage(image, npc.x - 8, npc.y - 18, 58, 72);
+      ctx.drawImage(image, npc.x - 8, npc.y - 18, 85, 85);
     } else {
-      ctx.fillStyle = helper?.color || npc.color;
-      ctx.fillRect(npc.x, npc.y, npc.width, npc.height);
+      const defaultImage = AssetLoader.getImage("ajudante_default");
 
-      ctx.fillStyle = "#ffffff";
-      ctx.fillRect(npc.x + 7, npc.y + 6, 6, 6);
-      ctx.fillRect(npc.x + 21, npc.y + 6, 6, 6);
+      if (defaultImage) {
+        ctx.drawImage(defaultImage, npc.x - 8, npc.y - 18, 85, 85);
+      } else {
+        ctx.fillStyle = helper?.color || npc.color;
+        ctx.fillRect(npc.x, npc.y, npc.width, npc.height);
 
-      ctx.fillStyle = "#1f2937";
-      ctx.fillRect(npc.x + 10, npc.y + 24, 14, 5);
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(npc.x + 7, npc.y + 6, 6, 6);
+        ctx.fillRect(npc.x + 21, npc.y + 6, 6, 6);
+
+        ctx.fillStyle = "#1f2937";
+        ctx.fillRect(npc.x + 10, npc.y + 24, 14, 5);
+      }
     }
 
     ctx.fillStyle = "#ffffff";
@@ -165,18 +176,31 @@ const ColonyScene = {
   },
 
   drawAurora(ctx, npc) {
-    ctx.fillStyle = "#a4161a";
-    ctx.fillRect(npc.x, npc.y, npc.width, npc.height);
-    ctx.fillStyle = "#d62828";
-    ctx.fillRect(npc.x + 16, npc.y - 10, npc.width - 26, npc.height + 20);
-    ctx.fillStyle = "#003049";
-    ctx.fillRect(npc.x + 22, npc.y + 12, 24, 12);
-    ctx.fillStyle = "#ffba08";
-    ctx.fillRect(npc.x - 12, npc.y + 15, 14, 15);
+    const image = npc.spriteKey ? AssetLoader.getImage(npc.spriteKey) : null;
 
-    ctx.fillStyle = "#ffffff";
-    ctx.font = '9px "Press Start 2P"';
-    ctx.fillText("Nave Aurora", npc.x - 20, npc.y - 22);
+    if (image) {
+      ctx.drawImage(image, npc.x + 16, npc.y - 10, 150, 150);
+      
+      ctx.fillStyle = "#ffffff";
+      ctx.font = '9px "Press Start 2P"';
+      ctx.textAlign = "center";
+      ctx.fillText("Nave Aurora", npc.x + npc.width / 2, npc.y - 15);
+      ctx.textAlign = "left"; // Restaura o alinhamento
+      
+    } else {
+      ctx.fillStyle = "#a4161a";
+      ctx.fillRect(npc.x, npc.y, npc.width, npc.height);
+      ctx.fillStyle = "#d62828";
+      ctx.fillRect(npc.x + 16, npc.y - 10, npc.width - 26, npc.height + 20);
+      ctx.fillStyle = "#003049";
+      ctx.fillRect(npc.x + 22, npc.y + 12, 24, 12);
+      ctx.fillStyle = "#ffba08";
+      ctx.fillRect(npc.x - 12, npc.y + 15, 14, 15);
+
+      ctx.fillStyle = "#ffffff";
+      ctx.font = '9px "Press Start 2P"';
+      ctx.fillText("Nave Aurora", npc.x - 20, npc.y - 22);
+    }
   },
 
   drawInteractionHint(ctx) {

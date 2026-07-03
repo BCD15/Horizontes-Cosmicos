@@ -294,9 +294,7 @@ const ShopModules = {
         cost: 6500
       }
     ]
-  }
-
-  ,
+  },
   helpers: {
     id: "helpers",
     menuText: "ENGENHEIROS AJUDANTES",

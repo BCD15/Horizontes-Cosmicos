@@ -22,6 +22,68 @@ window.addEventListener("DOMContentLoaded", async () => {
     console.warn("Background da Terra será carregado como fundo padrão.");
   }
 
+  try {
+    await AssetLoader.loadImage(
+      "player_ship_battle",
+      "./assets/images/ships/player/nave-batalha.png"
+    );
+  } catch (error) {
+    console.warn(error);
+    console.warn("Imagem da nave de batalha não encontrada. Usando blocos como fallback.");
+  }
+
+  try {
+    await AssetLoader.loadImage(
+      "nave_aurora",
+      "./assets/images/ships/player/nave-aurora.png"
+    );
+  } catch (error) {
+    console.warn(error);
+    console.warn("Imagem da nave não encontrada. Usando blocos como fallback.");
+  }
+
+  const planetKeys = Object.keys(PlanetData); // Pega 'mercurio', 'venus', 'terra', etc.
+
+  for (const pKey of planetKeys) {
+    try {
+      await AssetLoader.loadImage(
+        `${pKey}_merchant`,
+        `./assets/images/characters/comerciantes/${pKey}/comerciante.png`
+      );
+    } catch (error) {
+      console.warn(`[Aviso] Imagem do comerciante em ${pKey} não encontrada. Usando quadrado colorido.`);
+    }
+
+    try {
+      await AssetLoader.loadImage(
+        `battle_bg_${pKey}`, 
+        `./assets/images/battles/${pKey}.png` // Organizado por nome do planeta
+      );
+    } catch (error) {
+      console.warn(`[Aviso] Fundo de batalha para ${pKey} não encontrado. Usando padrão do espaço.`);
+    }
+  }
+
+  for (let i = 1; i <= 4; i++) {
+    try {
+      await AssetLoader.loadImage(
+        `enemy_ship_${i}`, 
+        `./assets/images/ships/enemies/enemie${i}.png` // Nomeie suas imagens de 1 a 4
+      );
+    } catch (error) {
+      console.warn(`[Aviso] Nave inimiga ${i} não encontrada.`);
+    }
+  }
+
+  try {
+    await AssetLoader.loadImage(
+      "ajudante_default",
+      "./assets/images/helpers/default.png"
+    );
+  } catch (error) {
+    console.warn("Imagem default do ajudante não encontrada.");
+  }
+
   if (ShopModules.helpers) {
     await Promise.all(
       ShopModules.helpers.items.map(async (helper) => {
